@@ -20,17 +20,16 @@ import { Typewriter } from "react-simple-typewriter";
 const HeroSection = () => {
   return (
     <Box
-      h="50vh"
+      h="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bg={useColorModeValue("white", "gray.800")}
+      bg={useColorModeValue("white", "blackAlpha.900")}
       px={4}
-      mt={{ base: 28, lg: 24, md: 24 }}
     >
       <Container maxW="container.xl" maxH="50vh">
         <Grid
-          templateColumns={{ base: "1fr", lg: "1fr auto 1fr" }} // Three columns for the divider
+          templateColumns={{ base: "1fr", lg: "1fr auto 1fr" }}
           gap={{ base: 6, lg: 10 }}
           alignItems="center"
         >
@@ -47,8 +46,8 @@ const HeroSection = () => {
                 as="span"
                 px="4"
                 py="1"
-                bg="blue.400"
-                color="white"
+                bg="white"
+                color="black"
                 fontWeight="bold"
               >
                 <Typewriter
@@ -56,8 +55,7 @@ const HeroSection = () => {
                     "Productivity.",
                     "Creativity.",
                     "Collaboration.",
-                    "Us.",
-                    "Zenflow.",
+                    "Agile.",
                   ]}
                   loop={false}
                   cursor
@@ -96,10 +94,9 @@ const HeroSection = () => {
               </Text>
               <Button
                 leftIcon={<Icon as={FaGoogle} />}
-                colorScheme="blue"
-                variant="solid"
+                variant="outline"
                 size="lg"
-                borderRadius={50}
+                borderRadius={10}
                 w={{ base: "full", md: "60%" }}
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
               >
@@ -107,10 +104,9 @@ const HeroSection = () => {
               </Button>
               <Button
                 leftIcon={<Icon as={FaGithub} />}
-                colorScheme="gray"
                 variant="outline"
                 size="lg"
-                borderRadius={50}
+                borderRadius={10}
                 w={{ base: "full", md: "60%" }}
                 onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
               >

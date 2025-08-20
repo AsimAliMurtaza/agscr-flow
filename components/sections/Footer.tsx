@@ -16,18 +16,18 @@ import {
 import { FaGlobe, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
-  const footerBg = useColorModeValue("gray.100", "gray.800");
+  const footerBg = useColorModeValue("gray.100", "black");
   const footerColor = useColorModeValue("gray.700", "gray.300");
-  const linkHoverColor = useColorModeValue("blue.500", "blue.400");
+  const linkHoverColor = useColorModeValue("gray.500", "gray.400");
 
   return (
-    <Box as="footer" bg={footerBg} color={footerColor} py={12} mt={6}>
+    <Box as="footer" bg={footerBg} color={footerColor} py={12} px={6}>
       <Container maxW="container.xl">
         {/* Footer Content */}
         <SimpleGrid columns={{ base: 1, md: 3, lg: 4 }} spacing={10}>
           {/* Column 1 - Logo & Company */}
           <Stack align="flex-start">
-            <Image src="/logo.svg" alt="Zenflow Logo" h="30px" mb={4} />
+            <Image src="/logo.svg" alt="AGSCR-Flow Logo" h="30px" mb={4} />
             <Text fontWeight="bold">Company</Text>
             <Link href="#" _hover={{ color: linkHoverColor }}>
               Careers
@@ -49,8 +49,11 @@ const Footer = () => {
           {/* Column 2 - Products */}
           <Stack align="flex-start">
             <Text fontWeight="bold">Products</Text>
-            <Link href="#" _hover={{ color: linkHoverColor }}>
-              Zenflow
+            <Link
+              href="https://cognivia.vercel.app"
+              _hover={{ color: linkHoverColor }}
+            >
+              Cognivia
             </Link>
             <Link fontWeight="bold" href="#" _hover={{ color: linkHoverColor }}>
               See all products →
@@ -67,7 +70,7 @@ const Footer = () => {
               Purchasing & Licensing
             </Link>
             <Link href="#" _hover={{ color: linkHoverColor }}>
-              Zenflow Community
+              Our Community
             </Link>
             <Link href="#" _hover={{ color: linkHoverColor }}>
               Marketplace
@@ -137,7 +140,7 @@ const Footer = () => {
           justify="space-between"
           mb={-10}
         >
-          <Text>Copyright © {new Date().getFullYear()} Zenflow Inc.</Text>
+          <Text>Copyright © {new Date().getFullYear()} Cognivia Inc.</Text>
           <Stack direction="row" spacing={6}>
             <Link href="#" _hover={{ color: linkHoverColor }}>
               Privacy Policy
@@ -145,15 +148,11 @@ const Footer = () => {
             <Link href="#" _hover={{ color: linkHoverColor }}>
               Terms
             </Link>
-            <Link href="#" _hover={{ color: linkHoverColor }}>
-              Impressum
-            </Link>
           </Stack>
           <IconButton
             aria-label="Change language"
             icon={<FaGlobe />}
             variant="ghost"
-            _hover={{ color: linkHoverColor }}
           />
         </Stack>
       </Container>

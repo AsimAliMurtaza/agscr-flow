@@ -16,6 +16,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   VStack,
+  Divider,
 } from "@chakra-ui/react";
 import { HamburgerIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
@@ -38,18 +39,19 @@ const Navbar = () => {
       w="100vw"
       top={0}
       zIndex={100}
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("white", "black")}
       boxShadow="sm"
     >
       <Container maxW="container.xl">
         <Flex justify="space-between" align="center" py={4}>
           {/* Logo */}
           <Heading
-            as="h1"
+            as="h2"
             size="lg"
-            color={useColorModeValue("blue.600", "blue.300")}
+            fontWeight="md"
+            color={useColorModeValue("blackAlpha.900", "white")}
           >
-            Zenflow
+            ZenFlow
           </Heading>
 
           {/* Desktop Navigation */}
@@ -58,9 +60,9 @@ const Navbar = () => {
               <MotionBox key={index} whileTap={{ scale: 0.95 }} mx={4}>
                 <Link
                   href="#"
-                  fontSize="lg"
-                  fontWeight="semibold"
-                  _hover={{ color: "blue.500", textDecoration: "none" }}
+                  fontSize="md"
+                  fontWeight="thin"
+                  _hover={{ color: "gray.500", textDecoration: "none" }}
                 >
                   {item}
                 </Link>
@@ -69,24 +71,24 @@ const Navbar = () => {
           </Flex>
 
           {/* Buttons (Sign In & Dark Mode Toggle) */}
-          <Flex align="center" gap={4}>
+          <Flex align="center" gap={2}>
             {/* Dark Mode Toggle */}
             <IconButton
               aria-label="Toggle Dark Mode"
               icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               onClick={toggleColorMode}
-              size="lg"
-              variant="ghost"
-              borderRadius={50}
+              size="md"
+              variant="outline"
+              borderRadius={10}
             />
 
             {/* Sign In Button */}
             <Button
-              colorScheme="blue"
-              borderRadius={50}
-              size="lg"
+              borderRadius={10}
+              size="md"
+              variant="outline"
               display={{ base: "none", md: "inline-flex" }}
-                onClick={onClickHandler}
+              onClick={onClickHandler}
             >
               Sign In
             </Button>
@@ -96,8 +98,9 @@ const Navbar = () => {
               display={{ base: "flex", md: "none" }}
               aria-label="Open Menu"
               icon={<HamburgerIcon />}
-              variant="ghost"
-              fontSize="2xl"
+              variant="outline"
+              fontSize="xl"
+              borderRadius="10"
               onClick={onOpen}
             />
           </Flex>
@@ -107,41 +110,46 @@ const Navbar = () => {
       {/* Mobile Drawer */}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent bg={useColorModeValue("white", "gray.800")}>
+        <DrawerContent bg={useColorModeValue("white", "blackAlpha.900")}>
           <DrawerCloseButton />
 
-          <VStack spacing={6} mt={20} align="center">
+          <VStack spacing={4} mt={20} align="center">
             {["Features", "Pricing", "Contact"].map((item, index) => (
               <Link
                 key={index}
                 href="#"
-                fontSize="xl"
-                fontWeight="bold"
+                fontSize="lg"
+                fontWeight="md"
                 onClick={onClose}
-                _hover={{ color: "blue.500", textDecoration: "none" }}
+                _hover={{ color: "gray.500", textDecoration: "none" }}
               >
                 {item}
               </Link>
             ))}
 
-            {/* Dark Mode Toggle inside Mobile Menu */}
-            <IconButton
-              aria-label="Toggle Dark Mode"
-              icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              onClick={toggleColorMode}
-              size="lg"
-              variant="ghost"
-            />
+            <Box display="flex" flexDirection="column" gap={4}>
+              {/* Dark Mode Toggle inside Mobile Menu */}
+              <Button
+                aria-label="Toggle Dark Mode"
+                leftIcon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                onClick={toggleColorMode}
+                size="md"
+                borderRadius={10}
+                variant="outline"
+              >
+                Switch
+              </Button>
 
-            {/* Sign In Button */}
-            <Button
-              colorScheme="blue"
-              borderRadius={50}
-              size="lg"
-              onClick={onClickHandler}
-            >
-              Sign In
-            </Button>
+              {/* Sign In Button */}
+              <Button
+                borderRadius={10}
+                size="md"
+                variant="outline"
+                onClick={onClickHandler}
+              >
+                Sign In
+              </Button>
+            </Box>
           </VStack>
         </DrawerContent>
       </Drawer>

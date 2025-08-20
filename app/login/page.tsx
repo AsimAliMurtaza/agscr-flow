@@ -30,15 +30,10 @@ export default function LoginPage() {
   const toast = useToast();
   const router = useRouter();
 
-
   // Color mode values
-  const bgColor = useColorModeValue("gray.50", "gray.900");
-  const cardBgColor = useColorModeValue("white", "gray.800");
+  const bgColor = useColorModeValue("gray.50", "black");
   const textColor = useColorModeValue("gray.700", "gray.200");
   const borderColor = useColorModeValue("gray.300", "gray.600");
-  const inputFocusBorderColor = useColorModeValue("blue.500", "blue.400");
-  const grayTextColor = useColorModeValue("gray.500", "gray.400");
-  const buttonHoverColor = useColorModeValue("blue.600", "blue.300");
 
   const handleLogin = async () => {
     setLoading(true);
@@ -69,22 +64,16 @@ export default function LoginPage() {
       align="center"
       minH="100vh"
       bg={bgColor}
-      bgImage="/bg-pattern.svg"
-      bgSize="cover"
       bgPosition="center"
     >
       <Container maxW="sm" px={4}>
         <Box
-          bg={cardBgColor}
           p={8}
-          borderRadius="lg"
-          boxShadow="lg"
+          borderRadius="20"
+          bg={useColorModeValue("white", "whiteAlpha.200")}
           textAlign="center"
+          border="1px solid gray"
         >
-          {/* 🏢 Logo */}
-          <Image src="/logo.svg" alt="Zenflow" mx="auto" h="40px" mb={4} />
-
-          {/* 📝 Heading */}
           <Heading size="md" fontWeight="bold" color={textColor}>
             Log in to continue
           </Heading>
@@ -98,15 +87,10 @@ export default function LoginPage() {
               <Input
                 type="email"
                 placeholder="you@example.com"
-                bg={cardBgColor}
                 border="1px solid"
                 borderColor={borderColor}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                _focus={{
-                  borderColor: inputFocusBorderColor,
-                  boxShadow: "outline",
-                }}
               />
             </FormControl>
 
@@ -117,25 +101,18 @@ export default function LoginPage() {
               <Input
                 type="password"
                 placeholder="••••••••"
-                bg={cardBgColor}
                 border="1px solid"
                 borderColor={borderColor}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                _focus={{
-                  borderColor: inputFocusBorderColor,
-                  boxShadow: "outline",
-                }}
               />
             </FormControl>
 
             <Button
               onClick={handleLogin}
-              colorScheme="blue"
-              w="full"
               size="md"
+              variant="outline"
               isLoading={loading}
-              _hover={{ bg: buttonHoverColor }}
             >
               Continue
             </Button>
@@ -151,7 +128,6 @@ export default function LoginPage() {
                 w="full"
                 leftIcon={<FcGoogle />}
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-                _hover={{ bg: useColorModeValue("gray.100", "gray.700") }}
               >
                 Google
               </Button>
@@ -160,14 +136,13 @@ export default function LoginPage() {
                 w="full"
                 leftIcon={<FaGithub color="#000000" />}
                 onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-                _hover={{ bg: useColorModeValue("gray.100", "gray.700") }}
               >
                 Github
               </Button>
             </VStack>
 
             {/* 🔗 Extra Links */}
-            <Text fontSize="sm" color="blue.500" textAlign="center" mt={4}>
+            <Text fontSize="sm" textAlign="center" mt={4}>
               <Button
                 variant="link"
                 onClick={() => router.push("/forgot-password")}
@@ -180,14 +155,6 @@ export default function LoginPage() {
               </Button>
             </Text>
           </VStack>
-
-          {/* 📜 Footer */}
-          <Text fontSize="xs" color={grayTextColor} mt={6}>
-            One account for Zenflow.{" "}
-            <Button variant="link" color="blue.500">
-              Learn more
-            </Button>
-          </Text>
         </Box>
       </Container>
     </Flex>
