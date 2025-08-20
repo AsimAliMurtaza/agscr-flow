@@ -42,6 +42,7 @@ import AIAssistant from "@/components/AIAssistant";
 import { IconType } from "react-icons/lib";
 import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const MotionBox = motion(Box);
 
@@ -63,13 +64,13 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   // Material You colors
-  const sidebarBg = useColorModeValue("white", "gray.800");
+  const sidebarBg = useColorModeValue("white", "whiteAlpha.200");
   const hoverBg = useColorModeValue("gray.100", "gray.700");
   const textColor = useColorModeValue("gray.800", "gray.100");
-  const primaryColor = useColorModeValue("blue.600", "blue.300");
+  const primaryColor = useColorModeValue("gray.900", "white");
 
   const dividerColor = useColorModeValue("gray.200", "gray.600");
-  const surfaceColor = useColorModeValue("white", "gray.900");
+  const surfaceColor = useColorModeValue("white", "black");
 
   if (status === "loading")
     return (
@@ -83,7 +84,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     return null;
   }
 
-  const sidebarWidth = collapsed ? "80px" : "280px";
+  const sidebarWidth = collapsed ? "60px" : "220px";
 
   const renderSidebarContent = () => (
     <VStack align="start" spacing={4} h="full">
@@ -97,18 +98,18 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           align="center"
         >
           {!collapsed && (
-            <Heading size="lg" fontWeight="bold" color={primaryColor}>
-              ZenFlow
+            <Heading size="md" fontWeight="normal" color={primaryColor}>
+              Title
             </Heading>
           )}
           <IconButton
             aria-label="Toggle Sidebar"
-            icon={collapsed ? <BiMenu /> : <BiMenuAltLeft />}
+            icon={collapsed ? <FaArrowRight /> : <FaArrowLeft />}
             onClick={() => setCollapsed(!collapsed)}
             variant="ghost"
             size="sm"
             color={textColor}
-            borderRadius="full"
+            borderRadius="20"
           />
         </Flex>
       )}
@@ -116,7 +117,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       {isMobile ? (
         <DrawerHeader>
           <Heading size="lg" fontWeight="bold" color={primaryColor}>
-            ZenFlow
+            Title
           </Heading>
         </DrawerHeader>
       ) : (
@@ -260,7 +261,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         transition="margin-left 0.3s ease"
       >
         {children}
-        <AIAssistant/>
+        <AIAssistant />
       </Box>
     </Flex>
   );
@@ -281,8 +282,8 @@ const NavItem = ({
   collapsed: boolean;
   primaryColor: string;
 }) => {
-  const hoverBg = useColorModeValue("gray.100", "gray.700");
-  const activeBg = useColorModeValue("blue.50", "blue.900");
+  const hoverBg = useColorModeValue("gray.100", "whiteAlpha.200");
+  const activeBg = useColorModeValue("gray.100", "whiteAlpha.300");
 
   return (
     <Tooltip label={collapsed ? label : ""} placement="right" hasArrow>
@@ -290,11 +291,8 @@ const NavItem = ({
         justifyContent={collapsed ? "center" : "flex-start"}
         variant="ghost"
         w="full"
-        px={4}
-        py={6}
-        borderRadius="full"
-        fontWeight="medium"
-        fontSize="md"
+        borderRadius="10"
+        fontSize="sm"
         leftIcon={<Box as={icon} />}
         iconSpacing={collapsed ? 0 : 3}
         _hover={{ bg: hoverBg }}

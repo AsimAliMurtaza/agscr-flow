@@ -42,12 +42,12 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const DashboardContent = () => {
-  const bgColor = useColorModeValue("white", "gray.900");
-  const cardBg = useColorModeValue("white", "gray.800");
+  const bgColor = useColorModeValue("white", "black");
+  const cardBg = useColorModeValue("white", "whiteAlpha.200");
   const borderColor = useColorModeValue("gray.200", "gray.700");
-  const textColor = useColorModeValue("gray.800", "gray.100");
-  const iconColor = useColorModeValue("gray.600", "gray.300");
-  const statCardHover = useColorModeValue("gray.100", "gray.700");
+  const textColor = useColorModeValue("gray.900", "gray.100");
+  const iconColor = useColorModeValue("black", "white");
+  const statCardHover = useColorModeValue("gray.100", "whiteAlpha.100");
   const toast = useToast();
   const router = useRouter();
 
@@ -191,15 +191,15 @@ const DashboardContent = () => {
       {/* Stats Grid */}
       <Grid
         templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-        gap={6}
-        mb={8}
+        gap={4}
+        mb={4}
       >
         <Card
           bg={cardBg}
           shadow="md"
           border="1px solid"
           borderColor={borderColor}
-          borderRadius="2xl"
+          borderRadius="20"
           transition="background-color 0.3s ease"
           _hover={{ bg: statCardHover }}
         >
@@ -208,7 +208,7 @@ const DashboardContent = () => {
               title="Total Projects"
               count={reports.totalProjects}
               icon={FiHome}
-              color="blue.500"
+              color={useColorModeValue("gray", "white")}
               iconColor={iconColor}
             />
           </CardBody>
@@ -216,10 +216,9 @@ const DashboardContent = () => {
 
         <Card
           bg={cardBg}
-          shadow="md"
           border="1px solid"
           borderColor={borderColor}
-          borderRadius="2xl"
+          borderRadius="20"
           transition="background-color 0.3s ease"
           _hover={{ bg: statCardHover }}
         >
@@ -228,7 +227,7 @@ const DashboardContent = () => {
               title="Completed Projects"
               count={reports.completedProjects}
               icon={FiCheckCircle}
-              color="green.500"
+              color={useColorModeValue("gray", "white")}
               iconColor={iconColor}
             />
           </CardBody>
@@ -236,10 +235,9 @@ const DashboardContent = () => {
 
         <Card
           bg={cardBg}
-          shadow="md"
           border="1px solid"
           borderColor={borderColor}
-          borderRadius="2xl"
+          borderRadius="20"
           transition="background-color 0.3s ease"
           _hover={{ bg: statCardHover }}
         >
@@ -248,7 +246,7 @@ const DashboardContent = () => {
               title="In Progress Projects"
               count={reports.inProgressProjects}
               icon={FiClock}
-              color="purple.500"
+              color={useColorModeValue("gray", "white")}
               iconColor={iconColor}
             />
           </CardBody>
@@ -256,13 +254,12 @@ const DashboardContent = () => {
       </Grid>
 
       {/* Project Reports Section */}
-      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} mb={8}>
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4} mb={4}>
         <Card
           bg={cardBg}
-          shadow="md"
           border="1px solid"
           borderColor={borderColor}
-          borderRadius="2xl"
+          borderRadius="20"
           transition="background-color 0.3s ease"
           _hover={{ bg: statCardHover }}
         >
@@ -271,7 +268,7 @@ const DashboardContent = () => {
               title="Upcoming Deadlines"
               projects={reports.approachingDeadlineProjects}
               icon={FiAlertCircle}
-              iconColor="yellow.500"
+              iconColor={iconColor}
               emptyMessage="No projects approaching deadline"
               formatDate={formatDate}
             />
@@ -280,10 +277,9 @@ const DashboardContent = () => {
 
         <Card
           bg={cardBg}
-          shadow="md"
           border="1px solid"
           borderColor={borderColor}
-          borderRadius="2xl"
+          borderRadius="20"
           transition="background-color 0.3s ease"
           _hover={{ bg: statCardHover }}
         >
@@ -303,20 +299,18 @@ const DashboardContent = () => {
       {/* Task Reports Section */}
       <Card
         bg={cardBg}
-        shadow="md"
         border="1px solid"
         borderColor={borderColor}
-        borderRadius="2xl"
-        p={6}
-        mb={8}
+        borderRadius="20"
+        mb={4}
         transition="background-color 0.3s ease"
         _hover={{ bg: statCardHover }}
       >
         <CardBody>
           <HStack mb={4} justify="space-between">
             <HStack>
-              <Icon as={FiList} boxSize={5} color="blue.500" />
-              <Text fontSize="lg" fontWeight="bold" color={textColor}>
+              <Icon as={FiList} boxSize={4} color={iconColor} />
+              <Text fontSize="lg" fontWeight="normal" color={textColor}>
                 Task Overview by Project
               </Text>
             </HStack>
@@ -359,57 +353,6 @@ const DashboardContent = () => {
         </CardBody>
       </Card>
 
-      {/* Project Completion */}
-      <Card
-        bg={cardBg}
-        shadow="md"
-        border="1px solid"
-        borderColor={borderColor}
-        borderRadius="2xl"
-        p={6}
-        transition="background-color 0.3s ease"
-        _hover={{ bg: statCardHover }}
-      >
-        <CardBody>
-          <HStack mb={4}>
-            <Icon as={FiPercent} boxSize={5} color="purple.500" />
-            <Text fontSize="lg" fontWeight="bold" color={textColor}>
-              Project Completion
-            </Text>
-          </HStack>
-          <Divider mb={6} />
-          {reports.projectCompletions.length > 0 ? (
-            <VStack spacing={4}>
-              {reports.projectCompletions.map((project, index) => (
-                <Box key={index} w="full">
-                  <HStack justify="space-between" mb={2}>
-                    <Text fontWeight="medium">{project.name}</Text>
-                    <Badge
-                      colorScheme={
-                        (project.completion ?? 0) > 70
-                          ? "green"
-                          : (project.completion ?? 0) > 40
-                          ? "yellow"
-                          : "red"
-                      }
-                    >
-                      {project.completion}%
-                    </Badge>
-                  </HStack>
-                  <Progress
-                    value={project.completion}
-                    colorScheme="blue"
-                    size="sm"
-                    borderRadius="full"
-                  />
-                </Box>
-              ))}
-            </VStack>
-          ) : (
-            <Text color="gray.500">No completion data available</Text>
-          )}
-        </CardBody>
-      </Card>
     </Flex>
   );
 };

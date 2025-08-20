@@ -51,7 +51,7 @@ const Navbar = () => {
             fontWeight="md"
             color={useColorModeValue("blackAlpha.900", "white")}
           >
-            ZenFlow
+            AGSCR Flow
           </Heading>
 
           {/* Desktop Navigation */}

@@ -32,13 +32,9 @@ export default function SignUpPage() {
   const toast = useToast();
 
   const { colorMode, toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue("gray.50", "gray.900");
-  const boxColor = useColorModeValue("white", "gray.800");
+  const bgColor = useColorModeValue("gray.50", "black");
+  const boxColor = useColorModeValue("white", "whiteAlpha.200");
   const textColor = useColorModeValue("gray.700", "gray.200");
-  const buttonHoverColor = useColorModeValue("blue.600", "blue.300");
-  const inputBgColor = useColorModeValue("white", "gray.700");
-  const inputBorderColor = useColorModeValue("gray.300", "gray.600");
-  const inputFocusBorderColor = useColorModeValue("blue.500", "blue.400");
   const grayTextColor = useColorModeValue("gray.500", "gray.400");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,13 +74,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <Flex
-      justify="center"
-      align="center"
-      minH="100vh"
-      bg={bgColor}
-      p={4}
-    >
+    <Flex justify="center" align="center" minH="100vh" bg={bgColor} p={4}>
       <Container maxW="sm">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -94,12 +84,12 @@ export default function SignUpPage() {
           <Box
             bg={boxColor}
             p={8}
-            borderRadius="lg"
-            boxShadow="lg"
+            borderRadius="20"
+            border="1px solid gray"
             textAlign="center"
           >
             {/* 🏢 Logo */}
-            <Image src="/logo.svg" alt="Zenflow" mx="auto" h="40px" mb={4} />
+            <Image src="/logo.svg" alt="AGSCR" mx="auto" h="40px" mb={4} />
 
             {/* 🌙 Dark Mode Toggle */}
             <IconButton
@@ -133,16 +123,11 @@ export default function SignUpPage() {
                 <Input
                   type="email"
                   placeholder="you@example.com"
-                  bg={inputBgColor}
-                  border="1px solid"
-                  borderColor={inputBorderColor}
-                  onChange={handleInputChange}
-                  name="email"
-                  _focus={{ borderColor: inputFocusBorderColor, boxShadow: "outline" }}
+                  value={email}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </FormControl>
 
-              {/* 🔑 Password Input */}
               <FormControl id="password" isRequired>
                 <FormLabel fontSize="sm" color={textColor}>
                   Password
@@ -150,22 +135,15 @@ export default function SignUpPage() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  bg={inputBgColor}
-                  border="1px solid"
-                  borderColor={inputBorderColor}
-                  onChange={handleInputChange}
-                  name="password"
-                  _focus={{ borderColor: inputFocusBorderColor, boxShadow: "outline" }}
+                  value={password}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </FormControl>
 
-              {/* 🔘 Signup Button */}
               <Button
                 onClick={handleSignup}
-                bg="blue.500"
-                color="white"
-                _hover={{ bg: buttonHoverColor }}
                 isLoading={loading}
+                variant="outline"
                 w="full"
               >
                 Sign Up
@@ -176,23 +154,11 @@ export default function SignUpPage() {
               {/* 🔗 Login Redirect */}
               <Text fontSize="sm" color={textColor} textAlign="center">
                 Already have an account?{" "}
-                <Button
-                  variant="link"
-                  color="blue.500"
-                  onClick={() => router.push("/login")}
-                >
+                <Button variant="link" onClick={() => router.push("/login")}>
                   Log in
                 </Button>
               </Text>
             </VStack>
-
-            {/* 📜 Footer */}
-            <Text fontSize="xs" color={grayTextColor} mt={6}>
-              One account for Zenflow.{" "}
-              <Button variant="link" color="blue.500">
-                Learn more
-              </Button>
-            </Text>
           </Box>
         </motion.div>
       </Container>
